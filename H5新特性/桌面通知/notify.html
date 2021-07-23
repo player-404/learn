@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="notifyme()">Notify Me!</button>
+    <script>
+        function notifyme() {
+            // 检查浏览器是否支持
+            if(!('Notification' in window)) {
+                alert('抱歉，您的浏览器暂不支持桌面通知功能')
+            }
+            // 检查用户是否同意接受通知
+            else if(Notification.permission === 'granted') {
+                let notification = new Notification('你好～');
+            }
+            // 向用户请求权限
+            else if(Notification.permission !== 'granted') {
+                Notification.requestPermission().then(permission => {
+                    if(permission === 'granted') {
+                        let nitification = new Notification('你好～')
+                    }
+                })
+            }
+        }
+    </script>
+</body>
+</html>

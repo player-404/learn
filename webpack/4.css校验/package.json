@@ -1,0 +1,26 @@
+{
+  "devDependencies": {
+    "autoprefixer": "^10.3.1",
+    "css-loader": "^5.2.6",
+    "less-loader": "^10.0.1",
+    "mini-css-extract-plugin": "^2.1.0",
+    "stylelint": "^13.13.1",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-webpack-plugin": "^2.2.2",
+    "webpack": "^5.44.0",
+    "webpack-cli": "^4.7.2"
+  },
+  "browserslist": [
+    "last 1 versions",
+    "> 1%"
+  ],
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "indentation": 4
+    }
+  },
+  "dependencies": {
+    "postcss-loader": "^6.1.1"
+  }
+}

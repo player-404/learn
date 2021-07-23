@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #drop_zone {
+                width: 200px;
+                height: 200px;
+                border: 1px solid blue;
+        }
+    </style>
+</head>
+<body>
+    <!-- ondrop: 拖动元素或文件释放时触发 -->
+    <!-- ongragover: 拖动元素或文件拖动到可释放目标触发 -->
+    <div id="drop_zone" ondrop="dropHandle()" ondragover="dragoverHandle()"></div>
+    <script>
+        // 拖拽元素释放
+        function dropHandle(e) {
+            console.log('释放');
+            let ev = e || window.event;
+            ev.preventDefault();
+            if(ev.dataTransfer.items) {
+                for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+                    var file = ev.dataTransfer.items[i].getAsFile();
+                    if (!file.type) {
+                        alert('请勿上传文件夹')
+                        return;
+                    }
+                }
+            } else {
+                for (let i = 0; i < ev.dataTransfer.files.length; i++) {
+                    console.log('file is', ev.dataTransfer.files[i].name)
+                }
+            }
+        }
+        //拖拽元素进入
+        function dragoverHandle(e) {
+            console.log('进入')
+            let ev = e || window.event;
+            ev.preventDefault();
+        }
+    </script>
+</body>
+</html>

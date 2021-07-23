@@ -1,0 +1,6 @@
+/*!***********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/index.css ***!
+  \***********************************************************************************************************/body,html{height:100%;width:100%}
+/*!***************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/index.less ***!
+  \***************************************************************************************************************************************************/button{border:none;border-radius:4px;height:40px;outline:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;width:100px}
