@@ -6,8 +6,8 @@ instanceof 运算符用于检测构造函数的 prototype 属性是否出现在�
 `object instanceof constructor`
 
 **参数**:
-   * object 某个实例对象
-   * constructor 某个构造函数
+* object 某个实例对象
+* constructor 某个构造函数
 
 ```javascript
 const Person = function () {
