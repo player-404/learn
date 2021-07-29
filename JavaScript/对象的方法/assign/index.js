@@ -22,6 +22,7 @@ let obj = { a: 1, b:2};
 let ass = Object.assign(obj, arr);
 console.log(ass); //{ '0': 1, '1': 2, '2': 3, a: 1, b: 2 }
 
+
 //引用数据类型会引发数据共享问题
 obj.a = 999
 console.log(ass);
