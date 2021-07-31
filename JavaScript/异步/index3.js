@@ -44,3 +44,4 @@ p99.then(() => {
     //... do something here
     delayFun()
 }).then(delayFun).then(delayFun)
+
