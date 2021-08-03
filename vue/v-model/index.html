@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input v-model="person" />
+        <!-- v-model 实现： 表单绑定value, 再监听input事件，当表单值改变时去改变value-->
+        <input :value="value" @input="change"/>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: () => ({
+                message: 'hello world',
+                person: '张三',
+                value: 'v-model原理'
+            }),
+            methods: {
+                change(e) {
+                    this.value = e.target.value;
+                }
+            },
+            watch: {
+                person(newv, oldv) {
+                    console.log(newv);
+                },
+                value(newv, oldv) {
+                    console.log(newv);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,71 +1,48 @@
 class Promise {
     constructor(extructor) {
-        //状态
         this.state = 'pending';
-        //reslove值
         this.value;
-        //reject值
-        this.reson;
-        //存放fulfilled状态的函数
-        this.onResolveFun = [];
-        //存放reject状态含糊是
-        this.onRejectFun = [];
-        //resolve函数
-        let resolve = (value) => {
+        this.reason;
+        this.resolveFun = [];
+        this.rejectFun = [];
+        let reasolve = (value) => {
             if (this.state === 'pending') {
                 this.state = 'fulfilled';
                 this.value = value;
-                //执行异步存入的函数
-                this.onResolveFun.forEach(item => item());
+                this.resolveFun.forEach(item => {
+                    item();
+                })
             }
-        };
-        //reject函数
+        }
         let reject = (reason) => {
-            if (this.state === 'pending') {
+            if (this.state = 'pending') {
                 this.state = 'reject';
                 this.reason = reason;
-                //执行异步存入的函数
-                this.onRejectFun.forEach(item => item())
+                this.rejectFun.forEach(item => {
+                    item();
+                })
             }
         }
 
-        //抛出错误直接执行reject
         try {
-            extructor(resolve, reject);
+            extructor(reasolve, reject);
         } catch (err) {
             reject(err);
         }
     }
-    then(onReslove, onReject) {
-        //解决状态
+    then(onReaslove, onReject) {
         if (this.state === 'fulfilled') {
-            onReslove(this.value);
+            onReaslove(this.value);
         }
-        //拒绝状态
         if (this.state === 'reject') {
             onReject(this.reason);
         }
-        //异步时 同步代码优先执行 此时状态未改变 为pending 此时将各状态函数存入数组 待之后执行
         if (this.state === 'pending') {
-            this.onResolveFun.push(() => {
-                onReslove(this.value);
-            });
-            this.onRejectFun.push(() => {
-                onReject(this.reason);
-            })
+            this.reasolveFun.push(onReaslove);
+            this.rejectFun.push(onReject);
         }
     }
 }
-
-let p = new Promise((reslove, reject) => {
-    setTimeout(() => {
-        reslove()
-    }, 1000)
-})
-p.then((value) => {
-    console.log('ok')
-})
-
 
 /* 
     实现思路：
