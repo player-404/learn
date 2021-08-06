@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            padding: 0 200px;
+            overflow: hidden;
+            box-sizing: border-box;
+            width: 100%;
+        }
+
+        .content {
+            width: 200px;
+            height: 200px;
+            background-color: forestgreen;
+            width: 100%;
+        }
+
+        .left {
+            width: 200px;
+            height: 200px;
+            background-color: deepskyblue;
+            margin-left: -100%;
+            position: relative;
+            left: -200px;
+        }
+
+        .right {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin-right: -200px;
+        }
+
+        .fl {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 中间盒子自适应，且最先渲染，左右盒子固定 -->
+    <div class="container">
+        <div class="content fl"></div>
+        <div class="left fl"></div>
+        <div class="right fl"></div>
+    </div>
+</body>
+
+</html>

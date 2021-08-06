@@ -1,10 +1,11 @@
 # vue router
 
+### 动态路由
 一个“路径参数”使用冒号 : 标记。当匹配到一个路由时，参数值会被设置到 this.$route.params，可以在每个组件内使用
 
 ```javascript
  {
-    path: '/home/:id', //id会自动赋值给$route.params
+    path: '/home/:id', //id会自动赋值给$route.params （id为动态参数）
     name: 'home',
     component: () => import('../views/Home.vue'),
   }
@@ -12,7 +13,7 @@
 
   直接使用
 
-  ```html
+  ```html   
   <div class="home">
       <h1>this is home page</h1>
       <h1>{{$route.params.id }}</h1>
