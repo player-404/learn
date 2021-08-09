@@ -11,7 +11,7 @@ function ajax(method = 'get', url, data, success, failed) {
     //get 请求时设置传入的参数
     let str = '';
     if (typeof data == 'object') {
-        for (let key in data) {
+        for (let key in data) { 
             str += key + '=' + data[key] + '&';
         }
         data = str.replace(/&$/, "");
