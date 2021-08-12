@@ -45,3 +45,5 @@ export default {
 }
 </script>
   ```
+
+  `一般用在详情等页面`
