@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-html="'<h1>sadasdasd</h1>'"></div>
+        <input v-bind:value="name"/>
+        <h2 v-text="name">sdsfsdf</h2>
+        <h3>{{c}}</h3>
+        <h4>{{d}}</h4>
+        <img :src="src"/>
+        {{a}}
+        <button v-on:click="clicks">asfhajkhdjkashkjh</button>
+        <button @click="clicks">@语法糖指令</button>
+    </div>
+</body>
+<script src="./observer.js"></script>
+<script src="./vue.js" ></script>
+<script type="text/javascript">
+    let vm = new Vue({ 
+        el: "#app",
+        data: {
+            name: '张三',
+            a: 1,
+            b: 2,
+            c: 3,
+            d: 4,
+            src: 'https://tse1-mm.cn.bing.net/th/id/R-C.15a1ba773a211acdeae39f83c2c13241?rik=h1wkOstFSHzvTg&riu=http%3a%2f%2fwww.desktx.com%2fd%2ffile%2fwallpaper%2fscenery%2f20170120%2ffdf948c82074494a74bf258eed4f855d.jpg&ehk=fYrgVtm0hD0sZn455mcVyf5k%2bQz7RScjHLMyUi6jG0A%3d&risl=&pid=ImgRaw&r=0'
+        },
+        methods: {
+            clicks() {
+                console.log(this);
+            }
+        }
+    })
+</script>
+</html>

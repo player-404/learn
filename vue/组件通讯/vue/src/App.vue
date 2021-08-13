@@ -1,9 +1,13 @@
 <template>
   <div id="app">
+    <h1 v-text="name"></h1>
+
+    <span v-html="'<h1>dasdas<h1>'"></span>
     <son :params="123" v-bind="person" />
     <brother />
     <button @click="click">click me bro</button>
     <button @click="jump">to about page</button>
+    <input v-model="name" value="123"/>
     <router-view />
   </div>
 </template>
