@@ -109,13 +109,26 @@ class Complain {
 const complainUtil = {
     text(node, key, vm) {
         let value = this.getVal(key, vm);
+        new Watcher(vm, key, (newv) => {
+            this.update.textUpdate(node, newv);
+        })
         this.update.textUpdate(node, value);
     },
     model(node, key, vm) {
-
+        let value = this.getVal(key, vm);
+        new Watcher(vm, key, (newv) => {
+            node.value = newv;
+        })
+        node.addEventListener('input', (e) => {
+            this.setVal(key, vm, e.target.value);
+        })
+        node.value = value;
     },
     html(node, key, vm) {
         let value = this.getVal(key, vm);
+        new Watcher(vm, key, (newv) => {
+            this.update.htmlUpdate(node, newv);
+        })
         this.update.htmlUpdate(node, value);
     },
     on(node, key, vm, dirEvent) {
@@ -124,6 +137,9 @@ const complainUtil = {
     },
     bind(node, key, vm, dirEvent) {
         console.log('dirEWvent', dirEvent, vm[key])
+        new Watcher(vm, key, (newv) => {
+           node[dirEvent] = newv;
+        })
         node.setAttribute(dirEvent, vm.$data[key]);
     },
     getVal(key, vm) {
@@ -143,6 +159,11 @@ const complainUtil = {
         let attr = key.split('.');
         return [...attr].reduce((data, currentAttr) => {
             return data[currentAttr] || currentAttr;
+        }, vm.$data)
+    },
+    setVal(expr, vm, value) {
+        expr.split('.').reduce((data, current) => {
+            data[current] = value;
         }, vm.$data)
     },
     update: {

@@ -10,11 +10,15 @@
 
 <body>
     <div id="app">
-        <div v-html="'<h1>sadasdasd</h1>'"></div>
+        <input type="text" v-model="name">
+        <div v-html="h"></div>
         <input v-bind:value="name"/>
         <h2 v-text="name">sdsfsdf</h2>
         <h3>{{c}}</h3>
         <h4>{{d}}</h4>
+        <h1>{{name}}</h1>
+        <h2>{{name}}</h2>
+        <h3>{{name}}</h3>
         <img :src="src"/>
         {{a}}
         <button v-on:click="clicks">asfhajkhdjkashkjh</button>
@@ -27,6 +31,7 @@
     let vm = new Vue({ 
         el: "#app",
         data: {
+            h: '<h1>我手</h1>',
             name: '张三',
             a: 1,
             b: 2,
@@ -36,7 +41,7 @@
         },
         methods: {
             clicks() {
-                console.log(this);
+                this.$data.name="王五";
             }
         }
     })
