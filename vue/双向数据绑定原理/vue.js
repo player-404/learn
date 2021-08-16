@@ -5,12 +5,24 @@ class Vue {
         this.$data = options.data;
         this.$methods = options.methods;
         this.$el = options.el;
-
+        this.proxy(this.$data);
         if (this.$el) {
-            new Observer(this.$data)
+            new Observer(this.$data) //劫持data中的所有属性 为每个属性添加访问器属性
             new Complain(this.$el, this);
         }
-
+    }
+    
+    proxy(data) {
+        for (let key in data) {
+            Object.defineProperty(this, key, { 
+                get() {
+                    return this.$data[key];
+                },
+                set(newv) {
+                    this.$data[key] = newv;
+                }
+            })
+        }
     }
 }
 
@@ -19,14 +31,14 @@ class Complain {
     constructor(el, vm) {
         this.vm = vm;
         let node = this.isElement(el) ? el : document.querySelector(el);
-        //创建文档片段 避免重绘回流
+        //创建文档片段 避免重复的重绘回流
         let f = this.createFrameElement(node);
         //解析
         this.complain(f);
 
         node.appendChild(f);
     }
-    //  解析
+    //  解析(render)
     complain(node) {
         let nodes = [...node.childNodes];
         nodes.forEach(child => {
@@ -109,6 +121,8 @@ class Complain {
 const complainUtil = {
     text(node, key, vm) {
         let value = this.getVal(key, vm);
+        //创建watcher实例 将watcher与dep关联 
+        ////创建watcher，利用回调更新视图 在每个用到data数据中的地方都会去创建watcher实例，而watcher实例的作用是在data数据变化时，去更新dom
         new Watcher(vm, key, (newv) => {
             this.update.textUpdate(node, newv);
         })
@@ -116,6 +130,7 @@ const complainUtil = {
     },
     model(node, key, vm) {
         let value = this.getVal(key, vm);
+        //创建watcher实例 
         new Watcher(vm, key, (newv) => {
             node.value = newv;
         })
@@ -126,6 +141,7 @@ const complainUtil = {
     },
     html(node, key, vm) {
         let value = this.getVal(key, vm);
+        //创建watcher实例 
         new Watcher(vm, key, (newv) => {
             this.update.htmlUpdate(node, newv);
         })
@@ -137,6 +153,7 @@ const complainUtil = {
     },
     bind(node, key, vm, dirEvent) {
         console.log('dirEWvent', dirEvent, vm[key])
+        //创建watcher实例 
         new Watcher(vm, key, (newv) => {
            node[dirEvent] = newv;
         })
@@ -158,7 +175,7 @@ const complainUtil = {
 
         let attr = key.split('.');
         return [...attr].reduce((data, currentAttr) => {
-            return data[currentAttr] || currentAttr;
+            return data[currentAttr] || currentAttr; 
         }, vm.$data)
     },
     setVal(expr, vm, value) {

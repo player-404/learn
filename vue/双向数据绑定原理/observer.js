@@ -4,19 +4,20 @@ class Watcher {
         this.vm = vm;
         this.expr = expr;
         this.cb = cb;
-        this.oldVal = this.getOldVal();
+        this.oldVal = this.getOldVal(); 
     }
 
     getOldVal() {
         Dep.target = this;
-        const oldVal = complainUtil.getVal(this.expr, this.vm);
+        const oldVal = complainUtil.getVal(this.expr, this.vm); //会触发get
         Dep.target = null;
         return oldVal;
     }
 
     update() {
-        const newVal = complainUtil.getVal(this.expr, this.vm);
+        const newVal = complainUtil.getVal(this.expr, this.vm); //会触发get
         if (newVal !== this.oldVal) {
+            //更新dom中数据的回调函数
             this.cb(newVal);
         }
     }

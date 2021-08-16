@@ -50,7 +50,7 @@ export default {
     names() {
       return this.name
     }
-  }
+  },
 };
 </script>
 <style lang="less">
