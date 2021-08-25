@@ -12,25 +12,29 @@
     <div id="app">
         <input type="text" v-model="name">
         <div v-html="h"></div>
-        <input v-bind:value="name"/>
+        <input v-bind:value="name" />
         <h2 v-text="name">sdsfsdf</h2>
         <h3>{{c}}</h3>
         <h4>{{d}}</h4>
         <h1>{{name}}</h1>
         <h2>{{name}}</h2>
         <h3>{{name}}</h3>
-        <img :src="src"/>
         {{a}}
         <button v-on:click="clicks">asfhajkhdjkashkjh</button>
         <button @click="clicks">@语法糖指令</button>
+        <p>{{name}}</p>
     </div>
 </body>
 <script src="./observer.js"></script>
-<script src="./vue.js" ></script>
+<script src="./vue.js"></script>
 <script type="text/javascript">
-    let vm = new Vue({ 
+    let vm = new Vue({
         el: "#app",
         data: {
+            obj: {
+                name: '王二麻总',
+                age: 78
+            },
             h: '<h1>我手</h1>',
             name: '张三',
             a: 1,
@@ -41,9 +45,11 @@
         },
         methods: {
             clicks() {
-                this.$data.name="王五";
+                this.obj.a = 1111;  
+                console.log(this);
             }
         }
     })
 </script>
+
 </html>

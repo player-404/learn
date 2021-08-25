@@ -1,4 +1,3 @@
-
 //入口
 class Vue {
     constructor(options) {
@@ -11,10 +10,10 @@ class Vue {
             new Complain(this.$el, this);
         }
     }
-    
+
     proxy(data) {
         for (let key in data) {
-            Object.defineProperty(this, key, { 
+            Object.defineProperty(this, key, {
                 get() {
                     return this.$data[key];
                 },
@@ -55,6 +54,7 @@ class Complain {
             }
         })
     }
+    
     //解析文字
     complainText(node) {
         let value = node.textContent;
@@ -64,6 +64,7 @@ class Complain {
     //解析->将数据渲染到dom上
     complainElement(node) {
         const attributes = node.attributes;
+        console.log('attributes', attributes);  
         //获取元素上绑定的指令
         [...attributes].forEach(item => {
             const { name, value } = item;
@@ -119,6 +120,7 @@ class Complain {
 
 //绑定指令
 const complainUtil = {
+
     text(node, key, vm) {
         let value = this.getVal(key, vm);
         //创建watcher实例 将watcher与dep关联 
@@ -128,6 +130,7 @@ const complainUtil = {
         })
         this.update.textUpdate(node, value);
     },
+
     model(node, key, vm) {
         let value = this.getVal(key, vm);
         //创建watcher实例 
@@ -139,6 +142,7 @@ const complainUtil = {
         })
         node.value = value;
     },
+
     html(node, key, vm) {
         let value = this.getVal(key, vm);
         //创建watcher实例 
@@ -155,7 +159,7 @@ const complainUtil = {
         console.log('dirEWvent', dirEvent, vm[key])
         //创建watcher实例 
         new Watcher(vm, key, (newv) => {
-           node[dirEvent] = newv;
+            node[dirEvent] = newv;
         })
         node.setAttribute(dirEvent, vm.$data[key]);
     },
@@ -175,7 +179,7 @@ const complainUtil = {
 
         let attr = key.split('.');
         return [...attr].reduce((data, currentAttr) => {
-            return data[currentAttr] || currentAttr; 
+            return data[currentAttr] || currentAttr;
         }, vm.$data)
     },
     setVal(expr, vm, value) {
