@@ -4,7 +4,7 @@ const url = require('url');
 const slugify = require('slugify');
 
 //⚡️使用slugify包
-const str = slugify('test dada', {replacement: '-', lower: true})
+const str = slugify('test dada', { replacement: '-', lower: true })
 
 const replaceTemplate = require('./modules/replaceTemplate');
 
@@ -31,7 +31,7 @@ const server = http.createServer((req, res) => {
         const template = data.map(el => replaceTemplate(templateCard, el)).join('');
         const output = templateOverview.replace(/{%PRODUCT_CARDS%}/g, template);
         res.end(output);
-        
+
     } else if (pathname === '/product') {
         //⚡️设置product页面路由
 

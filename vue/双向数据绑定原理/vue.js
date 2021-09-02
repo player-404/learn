@@ -54,7 +54,7 @@ class Complain {
             }
         })
     }
-    
+
     //解析文字
     complainText(node) {
         let value = node.textContent;
@@ -64,7 +64,7 @@ class Complain {
     //解析->将数据渲染到dom上
     complainElement(node) {
         const attributes = node.attributes;
-        console.log('attributes', attributes);  
+        console.log('attributes', attributes);
         //获取元素上绑定的指令
         [...attributes].forEach(item => {
             const { name, value } = item;
