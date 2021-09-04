@@ -76,9 +76,12 @@ app.delete('/api/v1/tours/:id', (req, res) => {
 
 //获取全部数据
 const getAllTours = (req, res) => {
-  res
-    .status(200)
-    .json({ status: '数据获取成功', result: data.length, data: { data } });
+  res.status(200).json({
+    status: '数据获取成功',
+    requetTimeAt: req.requestTime,
+    result: data.length,
+    data: { data },
+  });
 };
 
 //获取id下数据
@@ -137,6 +140,16 @@ const delTours = (req, res) => {
   }
   res.status(204).json({ status: '删除数据成功', data: null });
 };
+//创建一个自己的中间件
+app.use((req, res, next) => {
+  console.log('中间件被执行');
+  next();
+});
+//中间件：获取请求时间
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
 
 app.route('/api/v1/tours').get(getAllTours).post(addTours);
 app
