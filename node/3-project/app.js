@@ -5,9 +5,13 @@ const usersRouter = require('./routers/userRouters');
 //创建应用
 const app = express();
 
-//中间件
-app.use(morgan('dev'));
+//开发环境使用morgan中间件
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 app.use(express.json());
+//向浏览器提供静态文件
+app.use(express.static(`${__dirname}/public/`));
 
 /* //获取tours api下的所有数据
 app.get('/api/v1/tours', (req, res) => {
@@ -74,7 +78,6 @@ app.delete('/api/v1/tours/:id', (req, res) => {
 }); */
 
 //tours api
-
 //中间件：获取请求时间
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
@@ -83,8 +86,5 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/tours', toursRouter);
 app.use('/api/v1/users', usersRouter);
-//监听端口
-const port = 8000;
-app.listen(port, () => {
-  console.log('server is listening on 8000');
-});
+
+module.exports = app;
