@@ -1,0 +1,30 @@
+$width: 500px;
+$son_width: 200px;
+$color: white;
+$color2: gray;
+.box {
+  background-color: yellowgreen;
+  display: flex;
+  width: $width;
+  height: 300px;
+  justify-content: space-between;
+  .son {
+    width: $son_width;
+    height: 100%;
+    color: $color;
+    user-select: none;
+    transition: all 0.8s;
+    font: {
+      size: 20px;
+      weight: bold;
+    }
+    &:hover {
+      background-color: skyblue;
+      border-radius: 50%;
+    }
+  }
+  .son2 {
+    @extend .son;
+    color: $color2;
+  }
+}

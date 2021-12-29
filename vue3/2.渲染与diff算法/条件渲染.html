@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <template id="myapp">
+        <input type="text" placeholder="请输入你的成绩" v-model="score">
+        <div v-if="score > 90">优秀</div>
+        <div v-else-if="score > 80">良好</div>
+        <div v-else-if="score > 70">一般</div>
+        <div v-else-if="score > 60">及格</div>
+        <div v-else>不及格</div>
+        <template v-show="isShow">
+            <span>Hello</span>
+            <span>JavaScript</span>
+        </template>
+        <button @click="showWords">click me</button>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        const App = {
+            template: `#myapp`,
+            data() {
+                return {
+                    score: '',
+                    isShow: true
+                }
+            },
+            methods: {
+                showWords() {
+                    this.isShow = !this.isShow;
+                }
+            }
+
+        };
+        Vue.createApp(App).mount("#app");
+    </script>
+</body>
+
+</html>

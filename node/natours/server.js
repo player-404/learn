@@ -13,7 +13,7 @@ dotenv.config({ path: "./config.env" });
 
 //连接mongodb
 mongoose.connect(process.env.DATABASE_SERVER).then(() => {
-  console.log("moogose is connected");
+  console.log("mongoose is connected");
 });
 
 port = process.env.PORT || 3000;
@@ -21,7 +21,7 @@ const server = app.listen(port, "localhost", () => {
   console.log("server is running at port 8000");
 });
 
-//当node中出现错误时， 会执行该函数的回调函数
+//当node中出现错误时， 会执行该函 数的回调函数
 //每当 Promise 被拒绝并且在事件循环的一个轮询内没有错误句柄附加到承诺时，则会触发 'unhandledRejection' 事件
 process.on("unhandledRejection", (err) => {
   console.log(`error: ${err.name}: ${err.message}`);

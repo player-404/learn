@@ -112,7 +112,7 @@ exports.tourTime = catchAsync(async (req, res) => {
   const tours = await Tour.aggregate([
     {
       //展开文档数据中的数组
-      $unwisdnd: "$startDates",
+      $unwind: "$startDates",
     },
     {
       //匹配数据

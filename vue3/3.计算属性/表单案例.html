@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <template id="myapp">
+        <table border="1">
+            <tr>
+                <th></th>
+                <th v-for="item, index in title" :key="item">{{item}}</th>
+            </tr>
+            <tr v-for="item, index in books" :key="item.name">
+                <td>{{index}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.data}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                    <button :disabled="item.num === 1" @click="miner(item)">-</button>
+                    {{item.num}}
+                    <button @click="add(item)">+</button>
+                </td>
+                <td>
+                    <button @click="move(index)">移除</button>
+                </td>
+            </tr>
+        </table>
+        <h2>总价: {{sumPrice}}</h2>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        const App = {
+            template: `#myapp`,
+            data() {
+                return {
+                    title: [
+                        '书籍名称', '出版日期', '价格', '购买数量', '操作'
+                    ],
+                    books: [
+                        {
+                            name: '《算法导论》',
+                            data: '2006-9',
+                            price: '85',
+                            num: 1,
+                            disabled: true
+                        }, {
+                            name: '《编程艺术》',
+                            data: '2006-2',
+                            price: '59',
+                            num: 1,
+                            disabled: true
+                        }, {
+                            name: '《编程珠玑》',
+                            data: '2008-10',
+                            price: '39',
+                            num: 1,
+                            disabled: true
+                        }, {
+                            name: '《代码大全》',
+                            data: '2006-3',
+                            price: '128',
+                            num: 1,
+                            disabled: true
+                        }
+                    ],
+                }
+            },
+            computed: {
+                sumPrice() {
+                    let price = 0;
+                    this.books.forEach(item => {
+                        price += item.price * item.num;
+                    });
+                    return price;
+                }
+            },
+            methods: {
+                miner(data) {
+                    if (data.num <= 1) {
+                        data.disabled = true;
+                        return;
+                    };
+                    data.num--;
+                },
+                add(data) {
+                    if (data.num === 1) {
+                        data.disabled = false;
+                    }
+                    data.num++;
+                },
+                move(index) {
+                    this.books.splice(index, 1);
+                }
+            },
+            watch: {
+            }
+
+        };
+        Vue.createApp(App).mount("#app");
+    </script>
+</body>
+
+</html>

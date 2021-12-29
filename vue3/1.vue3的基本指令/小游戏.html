@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        .info {
+            display: flex;
+        }
+
+        .info div {
+            margin-right: 30px;
+        }
+
+        .hp-box div {
+            margin: 30px 0;
+
+        }
+
+        .message {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .attack {
+            width: 100px;
+            height: 50px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 50px;
+            background-color: gray;
+            cursor: pointer;
+        }
+
+        .over {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 40px;
+            background: rgba(0, 0, 0, .3)
+        }
+
+        .your {
+            color: red;
+        }
+
+        .enemy {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+
+    <template id="myapp">
+        <div class="info">
+            <div class="hp-box">
+                <div class="yourHp">你的生命值: {{yourHp}}</div>
+                <div class="hp">敌人声明值: {{hp}}</div>
+            </div>
+            <div class="message" :class="disable ? 'enemy' : 'your'">{{message}}</div>
+        </div>
+        <div class="attack" @mousedown.left="attack">攻击</div>
+        <div class="over" v-show="gameOver">
+            <div class="info">
+                <span>游戏结束！{{result}}</span>
+                <button>确认</button>
+            </div>
+        </div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        const App = {
+            template: `#myapp`,
+            data() {
+                return {
+                    yourHp: 100,
+                    hp: 100,
+                    message: '',
+                    gameOver: false,
+                    result: '',
+                    disable: false
+                }
+            },
+            methods: {
+                attack() {
+                    if (this.disable) return;
+                    let num = this.createNum();
+                    if (this.isAttact()) {
+                        this.enemyAttack();
+                        return;
+                    };
+                    this.message = `你攻击了敌人，敌人受到${num}点攻击`;
+                    this.hp -= num;
+                    this.disable = true;
+                },
+                createNum() {
+                    return parseInt(Math.random() * 10 + 1);
+                },
+                enemyAttack() {
+                    setTimeout(() => {
+                        let num = this.createNum();
+                        this.message = `敌人攻击了你， 你收到${num}点攻击`;
+                        this.yourHp -= num;
+                        this.disable = false;
+                    }, 1000)
+                },
+                isAttact() {
+                    let num = parseInt(Math.random() * 10 + 1);
+                    if (num <= 3) {
+                        this.message = `敌人躲避了你的攻击`;
+                        return true;
+                    };
+                    return false;
+                }
+            },
+            watch: {
+                hp(newv, oldv) {
+                    if (newv <= 0) {
+                        this.gameOver = true;
+                        this.result = '敌人死亡'
+                        this.hp = 0;
+                        return;
+                    }
+                    this.enemyAttack();
+                },
+                yourHp(newv, oldv) {
+                    if (newv <= 0) {
+                        this.gameOver = true;
+                        this.result = '你已死亡';
+                        this.yourHp = 0;
+                        return;
+                    }
+                }
+            }
+
+        };
+        Vue.createApp(App).mount("#app");
+    </script>
+</body>
+
+</html>

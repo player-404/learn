@@ -1,0 +1,31 @@
+$back: #333;
+$red: #e43937;
+$blue: #33a2ff;
+.box {
+  width: 400px;
+  height: 400px;
+  border: 1px solid $red;
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .text {
+    color: $back;
+    font: {
+      size: 30px;
+      weight: bold;
+    }
+  }
+}
+
+.btn {
+  width: 100px;
+  height: 40px;
+  border: 1px solid #fff;
+  background-color: $blue;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10%;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        1. 名字拼接
+        2. 分数判断
+        3. 文字反转
+     -->
+    <div id="app">
+    </div>
+    <template id="myapp">
+        <div>{{fullName}}</div>
+        <div>{{scores}}</div>
+        <div>{{world}}</div>
+    </template>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+
+        const App = {
+            template: `#myapp`,
+            data() {
+                return {
+                    firstName: 'tom',
+                    lastName: 'jake',
+                    score: 60,
+                    word: 'hello world'
+                }
+            },
+            computed: {
+                fullName() {
+                    return `${this.firstName} ${this.lastName}`
+                },
+                scores() {
+                    return this.score >= 60 ? '及格' : '不及格'
+                },
+                world() {
+                    console.log(this.word.split(''))
+                    return this.word.split('').reverse().join('');
+                }
+            }
+
+        };
+        Vue.createApp(App).mount("#app");
+    </script>
+</body>
+
+</html>

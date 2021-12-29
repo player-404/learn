@@ -1,0 +1,1 @@
+!function(){for(var o=0;o<99;o++)console.log(o)}();

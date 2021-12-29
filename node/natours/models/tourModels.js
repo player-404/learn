@@ -140,19 +140,4 @@ tourSchema.post(/^find/, function (doc, next) {
 //创建 模型 model: 模型是根据模式定义编译的奇特构造函数
 const Tour = mongoose.model("Tour", tourSchema);
 
-/* const toueTest = new Tour({
-    name: "故宫一日游",
-    ratng: 4.4,
-    price: 999,
-  });
-  //保存数据
-  toueTest
-    .save()
-    .then((data) => {
-      console.log("data is saving:", data);
-    })
-    .catch((err) => {
-      console.log("some error here:", err);
-    }); */
-
 module.exports = Tour;

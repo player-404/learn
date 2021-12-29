@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.container {
+  width: 800px;
+  height: 400px;
+  display: flex;
+}
+.container .left, .container .right {
+  flex-shrink: 0;
+  width: 400px;
+  height: 100%;
+  background-color: yellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .left:hover, .container .right:hover {
+  background-color: red;
+}
+.container .left button, .container .right button {
+  border: none;
+  width: 120px;
+  height: 50px;
+  border-radius: 14px;
+}
+.container .left button:hover, .container .right button:hover {
+  background-color: pink;
+}
+.container .right {
+  width: 400px;
+  background-color: skyblue;
+}
+
+/*这是一条会被编译的注释*/
+/*!这是一条压缩后也会显示的注释 */
+
+/*# sourceMappingURL=index.css.map */

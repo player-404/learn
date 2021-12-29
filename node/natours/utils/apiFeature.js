@@ -7,10 +7,11 @@ class ApiFeature {
 
   //条件查询
   filter() {
-    let reqObj = { ...this.queryString.query };
+    let reqObj = { ...this.queryString };
     //过滤特殊字段
     const filterStr = ["page", "limit", "sort", "filter"];
     filterStr.forEach((item) => delete reqObj[item]);
+
     //条件查询
     let queryStr = JSON.stringify(reqObj);
     reqObj = JSON.parse(
